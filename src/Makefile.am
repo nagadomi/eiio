@@ -1,0 +1,28 @@
+EXTRA_DIST = eiio_config_msvc.h
+
+lib_LTLIBRARIES = libeiio.la 
+libeiio_la_SOURCES = \
+eiio.c \
+eiio_bmp.c \
+eiio_color.c \
+eiio_gif.c \
+eiio_jpeg.c \
+eiio_png.c \
+eiio_ffmpeg.c \
+eiio_bitmap_handle.c \
+eiio.h \
+eiio_config.h \
+eiio_config_auto.h \
+eiio_internal.h 
+
+libeiio_la_LIBADD = 
+libeiio_la_CFLAGS = -Wall
+libeiio_la_CPPFLAGS = $(libeiio_la_CFLAGS)
+libeiio_la_LDFLAGS = -no-undefined -version-number @EIIO_MAJOR@:@EIIO_MINOR@:0 -rpath "$(libdir)"
+
+include_HEADERS = eiio.h eiio_config.h eiio_config_auto.h
+
+pkgconfigdir = @pkgconfigdir@
+pkgconfig_DATA = eiio.pc
+
+CLEANFILES = " $CLEANFILES eiio.pc "

@@ -1,0 +1,9 @@
+2012-09-02 nagadomi <nagadomi@nurs.or.jp>
+	* : release 0.5.0
+
+2010-12-31 nagadomi <nagadomi@nurs.or.jp>
+	* src/eiio_png.c, src/eiio_gif.c, src/eiio.c: 透過背景を指定色で塗りつぶせるようにした.
+	
+2010-06-09 nagadomi <nagadomi@nurs.or.jp>
+	* : first commit
+
