@@ -36,11 +36,6 @@ eiio_read_png(const void *blob, size_t blob_size)
 #include <setjmp.h>
 #include <assert.h>
 
-#ifdef _MSC_VER
-#pragma comment(lib, "libpng.lib")
-#pragma comment(lib, "zlib.lib")
-#endif
-
 typedef struct {
 	const unsigned char *blob;
 	size_t offset;

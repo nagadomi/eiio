@@ -37,10 +37,6 @@ eiio_read_gif(const void *blob, size_t blob_size)
 #include "eiio_internal.h"
 #include "gif_lib.h"
 
-#ifdef _MSC_VER
-#pragma comment(lib, "libungif.lib")
-#endif
-
 typedef struct {
 	const unsigned char *blob;
 	size_t offset;

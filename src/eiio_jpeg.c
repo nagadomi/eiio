@@ -29,9 +29,6 @@ eiio_image_t *eiio_read_jpeg(const void *blob, size_t blob_size)
 	return NULL;
 }
 #else
-#ifdef _MSC_VER
-#pragma comment(lib, "libjpeg.lib")
-#endif
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
