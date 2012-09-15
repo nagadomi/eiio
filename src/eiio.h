@@ -145,7 +145,6 @@ int eiio_video_set_size(eiio_video_t *video, int height, int width);
 #if EIIO_WINDOWS
 
 eiio_image_t *eiio_read_bitmap_handle(HBITMAP hDIB);
-eiio_image_t *eiio_read_bitmap_raw(HGLOBAL hDIB);
 
 #endif
 
