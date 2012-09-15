@@ -36,6 +36,10 @@ eiio_image_t *eiio_read_jpeg(const void *blob, size_t blob_size)
 #include <assert.h>
 #include <jpeglib.h>
 
+#ifdef _MSC_VER
+#  pragma comment(lib, "libjpeg.lib")
+#endif
+
 typedef struct {
 	struct jpeg_source_mgr pub;
 	JOCTET *buffer;
