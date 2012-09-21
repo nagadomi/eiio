@@ -25,7 +25,7 @@ THE SOFTWARE.
 
 #define EIIO_JPEG 1
 #define EIIO_PNG  1
-#define EIIO_GIF  0
+#define EIIO_GIF  1
 #define EIIO_BMP  0
 #define EIIO_FFMPEG 0
 
@@ -33,17 +33,6 @@ THE SOFTWARE.
 #define EIIO_STRICT 1
 #else
 #define EIIO_STRICT 0
-#endif
-
-#if EIIO_JPEG
-#  pragma comment(lib, "libjpeg.lib")
-#endif
-#if EIIO_PNG
-#  pragma comment(lib, "libpng15.lib")
-#  pragma comment(lib, "zlib1.lib")
-#endif
-#if EIIO_GIF
-#  pragma comment(lib, "libungif.lib")
 #endif
 
 #endif

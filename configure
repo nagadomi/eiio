@@ -12391,11 +12391,11 @@ eiio_ffmpeg=0
 #        [AC_CHECK_HEADERS(
 #        [libavcodec/avcodec.h libavformat/avformat.h libavutil/avutil.h libswscale/swscale.h],
 #		[eiio_ffmpeg=1
-#        AC_CHECK_LIB(avformat, main, [], [AC_MSG_ERROR(please either install libavformat-dev.)])
-#        AC_CHECK_LIB(avcodec, main, [], [AC_MSG_ERROR(please either install libavcodec-dev.)])
-#        AC_CHECK_LIB(swscale, main, [], [AC_MSG_ERROR(please either install libswscale-dev.)])
+#        AC_CHECK_LIB(avformat, main, [], [AC_MSG_ERROR(please install libavformat-dev.)])
+#        AC_CHECK_LIB(avcodec, main, [], [AC_MSG_ERROR(please install libavcodec-dev.)])
+#        AC_CHECK_LIB(swscale, main, [], [AC_MSG_ERROR(please install libswscale-dev.)])
 #        ],
-#		[AC_MSG_ERROR(ffmpeg headers not found. please either install libavformat-dev libavcodec-dev libavtuil-dev.)])
+#		[AC_MSG_ERROR(ffmpeg headers not found. please install libavformat-dev libavcodec-dev libavtuil-dev.)])
 #	],
 #	[eiio_ffmpeg=0]
 #)
