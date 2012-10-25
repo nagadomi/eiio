@@ -135,11 +135,13 @@ eiio_read_file(const char *filename)
 	fseek(fp, 0, SEEK_END);
 	file_size = ftell(fp);
 	if (file_size <= 0) {
+		fclose(fp);
 		return NULL;
 	}
 
 	blob = (unsigned char *)eiio_malloc(file_size);
 	if (blob == NULL) {
+		fclose(fp);
 		return NULL;
 	}
 
