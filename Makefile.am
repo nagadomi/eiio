@@ -26,5 +26,8 @@ deb:
 	"To build a Debian package, you must run configure with --enable-deb."; \
 	exit 1
 endif
-CLEANFILES = *.deb *.debian.tar.gz *.dsc *.changes *.build $(DEBSOURCEPKG) $(DEBSOURCEDIR)
+clean-local:
+	-rm -rf $(DEBSOURCEDIR)
+
+CLEANFILES = *.deb *.debian.tar.gz *.dsc *.changes *.build $(DEBSOURCEPKG) 
 
