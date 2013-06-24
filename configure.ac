@@ -10,18 +10,25 @@ AC_CONFIG_SRCDIR([src])
 AC_CONFIG_HEADER([src/config.h])
 AC_CONFIG_MACRO_DIR([m4])
 
-# clear CFLAGS
-AC_SUBST(CFLAGS)
-if test "" = "$CFLAGS"; then
-    CFLAGS=" "
-fi
-
 # Checks for programs.
 AC_PROG_CC
 AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_MAKE_SET
 AC_PROG_MKDIR_P
+
+AC_PATH_PROG([DEBUILD], [debuild], [notfound])
+AC_PATH_PROG([TEST], [test], [notfound])
+AC_PATH_PROG([ECHO], [echo], [notfound])
+AC_PATH_PROG([CP], [cp], [notfound])
+AC_PATH_PROG([MV], [mv], [notfound])
+AC_PATH_PROG([TAR], [tar], [notfound])
+
+# clear CFLAGS
+AC_SUBST(CFLAGS)
+if $TEST "" = "$CFLAGS"; then
+    CFLAGS=" "
+fi
 
 # Checks for libraries.
 LT_INIT([win32-dll])
@@ -30,8 +37,24 @@ LT_INIT([win32-dll])
 AC_HEADER_STDC
 AC_CHECK_HEADERS([stdlib.h string.h])
 
-AC_CHECK_LIB(m, main)
-AC_CHECK_LIB(rt, main)
+#AC_CHECK_LIB(m, main)
+#AC_CHECK_LIB(rt, main)
+
+eiio_deb=0
+eiio_debsign=0
+DPKG_FLAGS=""
+AX_ARG_ENABLE(deb,
+        AC_HELP_STRING([--enable-deb], [build debian package. ]), [no],
+	[eiio_deb=1],
+        [eiio_deb=0])
+AX_ARG_ENABLE(sdeb,
+        AC_HELP_STRING([--enable-sdeb], [build debian source package. ]), [no],
+	[eiio_deb=1;DPKG_FLAGS=" $DPKG_FLAGS -S -sa "],
+        [])
+AX_ARG_ENABLE(sign,
+        AC_HELP_STRING([--enable-sign], [build signed debian package. ]), [no],
+	[eiio_deb=1],
+        [DPKG_FLAGS=" $DPKG_FLAGS -uc -us "])
 
 AX_ARG_ENABLE(debug,
         AC_HELP_STRING([--enable-debug], [enable assert -g and boundary check. ]), [no],
@@ -120,6 +143,8 @@ esac
 CPPFLAGS=$CFLAGS
 CXXFLAGS=$CFLAGS
 
+AM_CONDITIONAL([BUILDING_DEB], [$TEST $eiio_deb = 1])
+AC_SUBST(DPKG_FLAGS)
 AC_SUBST(eiio_strict)
 AC_SUBST(eiio_jpeg)
 AC_SUBST(eiio_png)

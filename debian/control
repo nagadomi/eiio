@@ -1,0 +1,19 @@
+Source: eiio
+Priority: extra
+Maintainer: nagadomi <nagadomi@nurs.or.jp>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+Section: libs
+Homepage: http://github.com/nagadomi/eiio/
+
+Package: eiio-dev
+Section: libdevel
+Architecture: any
+Depends: eiio (= ${binary:Version})
+Description: Image Loader
+
+Package: eiio
+Section: libs
+Architecture: any
+Depends: libgif4, libjpeg8, libpng12-0
+Description: Image Loader
