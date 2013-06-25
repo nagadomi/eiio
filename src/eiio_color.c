@@ -73,8 +73,8 @@ eiio_rgb(eiio_image_t *rgb, const eiio_image_t *src)
 {
 	switch (src->color) {
 		case EIIO_COLOR_RGB:
-			memcpy(rgb->data, src->data,
-				sizeof(int) * src->width * src->height * src->channels);
+			memmove(rgb->data, src->data,
+					sizeof(int) * src->width * src->height * src->channels);
 			break;
 		case EIIO_COLOR_CMYK:
 			eiio_cmyk2rgb(rgb, src);

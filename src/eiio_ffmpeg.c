@@ -157,8 +157,8 @@ eiio_video_next(eiio_video_t *video)
 		image = eiio_image_alloc(video->width, video->height,
 								 EIIO_COLOR_RGB, eiio_malloc, free);
 		
-		memcpy(image->data, (eiio_uint8_t *)video->frame_rgb24->data[0],
-			   sizeof(eiio_uint8_t) * video->width * video->height * 3);
+		memmove(image->data, (eiio_uint8_t *)video->frame_rgb24->data[0],
+				sizeof(eiio_uint8_t) * video->width * video->height * 3);
 		
 		return image;
 	} else {
