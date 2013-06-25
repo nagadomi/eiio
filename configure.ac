@@ -46,7 +46,7 @@ DPKG_FLAGS=""
 AX_ARG_ENABLE(deb,
         AC_HELP_STRING([--enable-deb], [build debian package. ]), [no],
 	[eiio_deb=1],
-        [eiio_deb=0])
+        [])
 AX_ARG_ENABLE(sdeb,
         AC_HELP_STRING([--enable-sdeb], [build debian source package. ]), [no],
 	[eiio_deb=1;DPKG_FLAGS=" $DPKG_FLAGS -S -sa "],
