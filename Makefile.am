@@ -29,5 +29,5 @@ endif
 clean-local:
 	-rm -rf $(DEBSOURCEDIR)
 
-CLEANFILES = *.deb *.debian.tar.gz *.dsc *.changes *.build $(DEBSOURCEPKG) 
+CLEANFILES = *.deb *.debian.tar.gz *.dsc *.changes *.build *.upload $(DEBSOURCEPKG) 
 

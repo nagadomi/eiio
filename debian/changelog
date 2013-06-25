@@ -1,5 +1,11 @@
+eiio (0.5.2-1) precise; urgency=low
+
+  * fix Build-Depends
+
+ -- nagadomi <nagadomi@nurs.or.jp>  Mon, 24 Jun 2013 21:55:06 +0900
+
 eiio (0.5.1-1) precise; urgency=low
 
   * Initial release
 
- -- nagadomi <nagadomi@nurs.or.jp>  Mon, 17 Jun 2013 05:15:34 +0900
+ -- nagadomi <nagadomi@nurs.or.jp>  Mon, 24 Jun 2013 21:52:50 +0900
