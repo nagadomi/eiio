@@ -1,6 +1,0 @@
-Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: eiio
-Source: http://github.com/nagadomi/eiio/
-Files: *
-Copyright: 2013 nagadomi@nurs.or.jp
-License: MIT License

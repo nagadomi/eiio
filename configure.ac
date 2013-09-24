@@ -10,6 +10,21 @@ AC_CONFIG_SRCDIR([src])
 AC_CONFIG_HEADER([src/config.h])
 AC_CONFIG_MACRO_DIR([m4])
 
+AC_SUBST(CFLAGS)
+AC_SUBST(CPPFLAGS)
+AC_SUBST(LDFLAGS)
+if test "" = "$CFLAGS"; then
+    CFLAGS=" "
+fi
+if test "" = "$CPPFLAGS"; then
+    CPPFLAGS=" "
+fi
+if $TEST "" = "$LDFLAGS"; then
+    LDFLAGS=" "
+fi
+CFLAGS=" $CFLAGS -D_FORTIFY_SOURCE=2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security "
+LDFLAGS=" $LDFLAGS -Wl,-z,relro"
+
 # Checks for programs.
 AC_PROG_CC
 AC_PROG_INSTALL
@@ -23,12 +38,6 @@ AC_PATH_PROG([ECHO], [echo], [notfound])
 AC_PATH_PROG([CP], [cp], [notfound])
 AC_PATH_PROG([MV], [mv], [notfound])
 AC_PATH_PROG([TAR], [tar], [notfound])
-
-# clear CFLAGS
-AC_SUBST(CFLAGS)
-if $TEST "" = "$CFLAGS"; then
-    CFLAGS=" "
-fi
 
 # Checks for libraries.
 LT_INIT([win32-dll])
@@ -47,8 +56,8 @@ AX_ARG_ENABLE(deb,
         AC_HELP_STRING([--enable-deb], [build debian package. ]), [no],
 	[eiio_deb=1],
         [])
-AX_ARG_ENABLE(sdeb,
-        AC_HELP_STRING([--enable-sdeb], [build debian source package. ]), [no],
+AX_ARG_ENABLE(debsrc,
+        AC_HELP_STRING([--enable-debsrc], [build debian source package. ]), [no],
 	[eiio_deb=1;DPKG_FLAGS=" $DPKG_FLAGS -S -sa "],
         [])
 AX_ARG_ENABLE(sign,
@@ -138,7 +147,6 @@ case $host in
   *)
     ;;
 esac
-
 
 CPPFLAGS=$CFLAGS
 CXXFLAGS=$CFLAGS
