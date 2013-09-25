@@ -24,7 +24,6 @@ if $TEST "" = "$LDFLAGS"; then
     LDFLAGS=" "
 fi
 CFLAGS=" $CFLAGS -D_FORTIFY_SOURCE=2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security "
-LDFLAGS=" $LDFLAGS -Wl,-z,relro"
 
 # Checks for programs.
 AC_PROG_CC
@@ -143,6 +142,9 @@ case $host in
   *-*-mingw* | *-*-cygwin*)
     LDFLAGS="$LDFLAGS -Wl,--stack,10485760 "
     LIBS=" $LIBS -lstdc++ -lgdi32 "
+    ;;
+  *-linux*)
+    LDFLAGS=" $LDFLAGS -Wl,-z,relro"
     ;;
   *)
     ;;
