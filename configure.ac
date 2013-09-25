@@ -13,10 +13,11 @@ AC_CONFIG_MACRO_DIR([m4])
 AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)
 AC_SUBST(LDFLAGS)
-if test "" = "$CFLAGS"; then
+AC_PATH_PROG([TEST], [test], [notfound])
+if $TEST "" = "$CFLAGS"; then
     CFLAGS=" "
 fi
-if test "" = "$CPPFLAGS"; then
+if $TEST "" = "$CPPFLAGS"; then
     CPPFLAGS=" "
 fi
 if $TEST "" = "$LDFLAGS"; then
@@ -33,7 +34,6 @@ AC_PROG_MAKE_SET
 AC_PROG_MKDIR_P
 
 AC_PATH_PROG([DEBUILD], [debuild], [notfound])
-AC_PATH_PROG([TEST], [test], [notfound])
 AC_PATH_PROG([ECHO], [echo], [notfound])
 AC_PATH_PROG([CP], [cp], [notfound])
 AC_PATH_PROG([MV], [mv], [notfound])
