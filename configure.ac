@@ -45,8 +45,7 @@ LT_INIT([win32-dll])
 AC_HEADER_STDC
 AC_CHECK_HEADERS([stdlib.h string.h])
 
-#AC_CHECK_LIB(m, main)
-#AC_CHECK_LIB(rt, main)
+AC_CHECK_LIB(ssp, main) # for mingw
 
 eiio_deb=0
 eiio_debsign=0
