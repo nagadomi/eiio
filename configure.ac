@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.61)
-AC_INIT(eiio, 0.5.2, nagadomi@nurs.or.jp)
+AC_INIT(eiio, 0.5.3, nagadomi@nurs.or.jp)
 EIIO_MAJOR=0
 EIIO_MINOR=5
 AM_INIT_AUTOMAKE([foreign])

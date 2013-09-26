@@ -1,3 +1,9 @@
+eiio (0.5.3-1) UNRELEASED; urgency=low
+
+  * update origin version
+
+ -- nagadomi <nagadomi@nurs.or.jp>  Thu, 26 Sep 2013 14:19:21 +0900
+
 eiio (0.5.2-1) unstable; urgency=low
 
   * fix Build-Depends
