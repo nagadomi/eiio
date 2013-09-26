@@ -61,7 +61,7 @@ read_blob(GifFileType *gif, GifByteType *data, int length)
 	}
 
 	if (nb != 0) {
-		memcpy(data, blob_input->blob + blob_input->offset, nb);
+		memmove(data, blob_input->blob + blob_input->offset, nb);
 		blob_input->blob_size -= nb;
 		blob_input->offset += nb;
 	}
@@ -131,7 +131,7 @@ eiio_gif_read_rows(GifFileType *gif, int *transparent)
 				rows[y][x] =  gif->SBackGroundColor;
 			}
 		} else {
-			memcpy(rows[y], rows[0], width_size);
+			memmove(rows[y], rows[0], width_size);
 		}
 	}
 	rows[gif->SHeight] = NULL; /* null terminater */
@@ -228,7 +228,7 @@ simple_read_blob(GifFileType *gif, GifByteType *data, int length)
 {
 	static int offset = 0;
 	unsigned char*blob = (unsigned char *)gif->UserData;
-	memcpy(data, blob + offset, length);
+	memmove(data, blob + offset, length);
 	offset += length;
 	return length;
 }

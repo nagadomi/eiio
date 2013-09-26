@@ -25,4 +25,4 @@ include_HEADERS = eiio.h eiio_config.h eiio_config_auto.h
 pkgconfigdir = @pkgconfigdir@
 pkgconfig_DATA = eiio.pc
 
-CLEANFILES = " $CLEANFILES eiio.pc "
+CLEANFILES = eiio.pc

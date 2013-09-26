@@ -59,7 +59,7 @@ read_blob(png_structp png, png_bytep data, png_size_t length)
 		nb = blob_input->blob_size;
 	}
 
-	memcpy(data, blob_input->blob + blob_input->offset, nb);
+	memmove(data, blob_input->blob + blob_input->offset, nb);
 	blob_input->blob_size -= nb;
 	blob_input->offset += nb;
 }

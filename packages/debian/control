@@ -1,0 +1,23 @@
+Source: eiio
+Section: libs
+Priority: extra
+Maintainer: nagadomi <nagadomi@nurs.or.jp>
+Standards-Version: 3.9.3
+Build-Depends: debhelper (>= 8.0.0), autotools-dev, libpng-dev, libgif-dev, libjpeg-dev
+Homepage: http://github.com/nagadomi/eiio/
+
+Package: libeiio-dev
+Section: libdevel
+Architecture: any
+Depends: ${misc:Depends}, libeiio0 (= ${binary:Version})
+Description: header files for libeiio
+ The eiio is a library for handling image files.
+ This package contains the header files.
+
+Package: libeiio0
+Section: libs
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Image Load Library
+ The eiio is a library for handling image files.
+ This package contains the shared library.

@@ -4,13 +4,14 @@ Image Input Library.
 
 # Installation
 
-(ubuntu)
+(Ubuntu)
 
     sudo apt-get install libjpeg-dev libpng-dev libgif-dev
+    ./autogen.sh
     ./configure
     make
     sudo make install
-	sudo ldconfig
+    sudo ldconfig
 
 # Usage
 
@@ -54,3 +55,4 @@ int main(void)
 compiling
 
     gcc eiio_example.c -o eiio_example -O2 -leiio
+    gcc eiio_example.c -o eiio_example -O2 `pkg-config --cflags --libs eiio`

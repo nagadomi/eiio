@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.61)
-AC_INIT(eiio, 0.5.1, nagadomi@nurs.or.jp)
+AC_INIT(eiio, 0.5.3, nagadomi@nurs.or.jp)
 EIIO_MAJOR=0
 EIIO_MINOR=5
 AM_INIT_AUTOMAKE([foreign])
@@ -10,11 +10,20 @@ AC_CONFIG_SRCDIR([src])
 AC_CONFIG_HEADER([src/config.h])
 AC_CONFIG_MACRO_DIR([m4])
 
-# clear CFLAGS
 AC_SUBST(CFLAGS)
-if test "" = "$CFLAGS"; then
+AC_SUBST(CPPFLAGS)
+AC_SUBST(LDFLAGS)
+AC_PATH_PROG([TEST], [test], [notfound])
+if $TEST "" = "$CFLAGS"; then
     CFLAGS=" "
 fi
+if $TEST "" = "$CPPFLAGS"; then
+    CPPFLAGS=" "
+fi
+if $TEST "" = "$LDFLAGS"; then
+    LDFLAGS=" "
+fi
+CFLAGS=" $CFLAGS -D_FORTIFY_SOURCE=2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security "
 
 # Checks for programs.
 AC_PROG_CC
@@ -23,6 +32,12 @@ AC_PROG_LN_S
 AC_PROG_MAKE_SET
 AC_PROG_MKDIR_P
 
+AC_PATH_PROG([DEBUILD], [debuild], [notfound])
+AC_PATH_PROG([ECHO], [echo], [notfound])
+AC_PATH_PROG([CP], [cp], [notfound])
+AC_PATH_PROG([MV], [mv], [notfound])
+AC_PATH_PROG([TAR], [tar], [notfound])
+
 # Checks for libraries.
 LT_INIT([win32-dll])
 
@@ -30,8 +45,24 @@ LT_INIT([win32-dll])
 AC_HEADER_STDC
 AC_CHECK_HEADERS([stdlib.h string.h])
 
-AC_CHECK_LIB(m, main)
-AC_CHECK_LIB(rt, main)
+#AC_CHECK_LIB(m, main)
+#AC_CHECK_LIB(rt, main)
+
+eiio_deb=0
+eiio_debsign=0
+DPKG_FLAGS=""
+AX_ARG_ENABLE(deb,
+        AC_HELP_STRING([--enable-deb], [build debian package. ]), [no],
+	[eiio_deb=1],
+        [])
+AX_ARG_ENABLE(debsrc,
+        AC_HELP_STRING([--enable-debsrc], [build debian source package. ]), [no],
+	[eiio_deb=1;DPKG_FLAGS=" $DPKG_FLAGS -S -sa "],
+        [])
+AX_ARG_ENABLE(sign,
+        AC_HELP_STRING([--enable-sign], [build signed debian package. ]), [no],
+	[eiio_deb=1],
+        [DPKG_FLAGS=" $DPKG_FLAGS -uc -us "])
 
 AX_ARG_ENABLE(debug,
         AC_HELP_STRING([--enable-debug], [enable assert -g and boundary check. ]), [no],
@@ -112,14 +143,18 @@ case $host in
     LDFLAGS="$LDFLAGS -Wl,--stack,10485760 "
     LIBS=" $LIBS -lstdc++ -lgdi32 "
     ;;
+  *-linux*)
+    LDFLAGS=" $LDFLAGS -Wl,-z,relro"
+    ;;
   *)
     ;;
 esac
 
-
 CPPFLAGS=$CFLAGS
 CXXFLAGS=$CFLAGS
 
+AM_CONDITIONAL([BUILDING_DEB], [$TEST $eiio_deb = 1])
+AC_SUBST(DPKG_FLAGS)
 AC_SUBST(eiio_strict)
 AC_SUBST(eiio_jpeg)
 AC_SUBST(eiio_png)
