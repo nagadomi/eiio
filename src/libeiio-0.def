@@ -1,0 +1,22 @@
+LIBRARY "libeiio-0.dll"
+EXPORTS
+eiio_get_background_color
+eiio_get_outofmemory_func
+eiio_get_pixel_strict
+eiio_image_alloc
+eiio_image_free
+eiio_malloc
+eiio_read_bitmap_handle
+eiio_read_blob
+eiio_read_bmp
+eiio_read_file
+eiio_read_gif
+eiio_read_jpeg
+eiio_read_png
+eiio_rgb
+eiio_set_background_color
+eiio_set_outofmemory_func
+eiio_set_pixel_strict
+eiio_warnings
+eiio_write_blob
+eiio_write_file

@@ -87,7 +87,7 @@
 			Name="Release|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="4"
+			ConfigurationType="2"
 			CharacterSet="2"
 			WholeProgramOptimization="1"
 			>
@@ -109,7 +109,9 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="2"
+				InlineFunctionExpansion="2"
 				EnableIntrinsicFunctions="true"
+				FavorSizeOrSpeed="1"
 				AdditionalIncludeDirectories=""
 				PreprocessorDefinitions="_CRT_SECURE_NO_WARNINGS;NDEBUG;"
 				RuntimeLibrary="2"
@@ -131,12 +133,17 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLibrarianTool"
-				AdditionalDependencies="gdi32.lib"
-				OutputFile="$(OutDir)\libeiio-0.lib"
+				Name="VCLinkerTool"
+				OutputFile="$(OutDir)\libeiio-0.dll"
+				ModuleDefinitionFile="$(ProjectDir)..\src\libeiio-0.def"
+				LargeAddressAware="2"
+				ImportLibrary="$(TargetDir)libeiio-0.lib"
 			/>
 			<Tool
 				Name="VCALinkTool"
+			/>
+			<Tool
+				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -146,6 +153,9 @@
 			/>
 			<Tool
 				Name="VCFxCopTool"
+			/>
+			<Tool
+				Name="VCAppVerifierTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -211,6 +221,10 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath="..\src\libeiio-0.def"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>
