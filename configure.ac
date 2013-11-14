@@ -128,7 +128,6 @@ case $host in
     ;;
 esac
 
-CPPFLAGS=$CFLAGS
 CXXFLAGS=$CFLAGS
 
 AC_SUBST(eiio_strict)
