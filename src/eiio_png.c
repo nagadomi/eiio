@@ -212,10 +212,14 @@ eiio_read_png(const void *blob, size_t blob_size)
 		}
 	} else { // 4 color + alpha png
 		int bg[3];
+		eiio_uint8_t bgu[3];
 		int alpha;
 		int bg_w;
-		eiio_get_background_color(&bg[0], &bg[1], &bg[2]);
-
+		eiio_get_background_color(&bgu[0], &bgu[1], &bgu[2]);
+		bg[0] = (int)bgu[0];
+		bg[1] = (int)bgu[1];
+		bg[2] = (int)bgu[2];
+		
 		for (y = 0; y < height; ++y) {
 			int x;
 			for (x = 0; x < width; ++x) {

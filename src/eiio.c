@@ -300,25 +300,15 @@ eiio_image_free(eiio_image_t **image)
 static eiio_uint8_t g_background_color[3] = { 128, 128, 128 };
 
 void 
-eiio_set_background_color(int r, int g, int b)
+eiio_set_background_color(eiio_uint8_t r, eiio_uint8_t g, eiio_uint8_t b)
 {
-	int i;
-
 	g_background_color[0] = r;
 	g_background_color[1] = g;
 	g_background_color[2] = b;
-
-	for (i = 0; i < 3; ++i) {
-		if (g_background_color[i] > 255) {
-			g_background_color[i] = 255;
-		} else if (g_background_color[i] < 0) {
-			g_background_color[i] = 0;
-		}
-	}
 }
 
 void 
-eiio_get_background_color(int *r, int *g, int *b)
+eiio_get_background_color(eiio_uint8_t *r, eiio_uint8_t *g, eiio_uint8_t *b)
 {
 	*r = g_background_color[0];
 	*g = g_background_color[1];
