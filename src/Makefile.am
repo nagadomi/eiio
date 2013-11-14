@@ -17,7 +17,6 @@ eiio_internal.h
 
 libeiio_la_LIBADD = 
 libeiio_la_CFLAGS = -Wall
-libeiio_la_CPPFLAGS = $(libeiio_la_CFLAGS)
 libeiio_la_LDFLAGS = -no-undefined -version-number @EIIO_MAJOR@:@EIIO_MINOR@:@EIIO_REVISION@ -rpath "$(libdir)"
 nodist_include_HEADERS = eiio_config_auto.h
 include_HEADERS = eiio.h eiio_config.h
