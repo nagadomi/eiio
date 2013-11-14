@@ -84,8 +84,8 @@ typedef struct {
 eiio_image_t *eiio_read_file(const char *filename);
 eiio_image_t *eiio_read_blob(const void *blob, size_t blob_size);
 
-void eiio_set_background_color(int r, int g, int b);
-void eiio_get_background_color(int *r, int *g, int *b);
+void eiio_set_background_color(eiio_uint8_t r, eiio_uint8_t g, eiio_uint8_t b);
+void eiio_get_background_color(eiio_uint8_t *r, eiio_uint8_t *g, eiio_uint8_t *b);
 
 void eiio_set_pixel_strict(eiio_image_t *image,
 						   int x, int y, int channel,

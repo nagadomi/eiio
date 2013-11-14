@@ -243,7 +243,7 @@ eiio_read_gif(const void *blob, size_t blob_size)
 	gif_blob_input_t blob_input;
 	ColorMapObject *color_map;
 	int x, y;
-	int bg[3];
+	eiio_uint8_t bg[3];
 	int transparent = -1;
 	
 	blob_input.blob = (unsigned char *)blob;
