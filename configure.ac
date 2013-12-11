@@ -24,7 +24,9 @@ fi
 if test "" = "$LDFLAGS"; then
     LDFLAGS=" "
 fi
-CFLAGS=" $CFLAGS -D_FORTIFY_SOURCE=2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security "
+
+CFLAGS=" $CFLAGS -Wall -Wextra -Wformat=2 -Werror=format-security -Wdisabled-optimization -Winline -Wno-unused-parameter "
+CFLAGS=" $CFLAGS -D_FORTIFY_SOURCE=2 -fstack-protector --param=ssp-buffer-size=4 "
 
 # Checks for programs.
 AC_PROG_CC
@@ -149,3 +151,10 @@ Makefile
 ])
 
 AC_OUTPUT
+
+echo "libeiio $EIIO_MAJOR.$EIIO_MINOR.$EIIO_REVISION:"
+echo "   Building with JPEG support....... : $eiio_jpeg"
+echo "   Building with PNG  support....... : $eiio_png"
+echo "   Building with GIF  support....... : $eiio_gif"
+
+
