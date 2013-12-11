@@ -102,13 +102,16 @@ eiio_read_jpeg(const void *blob, size_t blob_size)
 {
 	eiio_image_t *image = NULL;
 	jmp_buf context;
-	struct jpeg_decompress_struct cinfo = {0};
-	struct jpeg_error_mgr jerr = {0};
+	struct jpeg_decompress_struct cinfo;
+	struct jpeg_error_mgr jerr;
 	JSAMPARRAY rows = NULL;
 	JSAMPLE *image_data = NULL;
 	J_COLOR_SPACE color_space;
 	int image_width, image_height, y;
 	unsigned int i;
+
+	memset(&cinfo, 0, sizeof(cinfo));
+	memset(&jerr, 0, sizeof(jerr));
 
 	// decompress
 	cinfo.client_data = (void*)&context;
