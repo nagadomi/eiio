@@ -138,14 +138,14 @@ eiio_gif_read_rows(GifFileType *gif, int *transparent)
 
 	do {
 		if (DGifGetRecordType(gif, &record_type) == GIF_ERROR) {
-			PrintGifError();
+			eiio_warnings("eiio_read_gif: malformed image\n");
 			eiio_gif_rows_free(&rows);
 			return NULL;
 		}
 		switch (record_type) {
 		case IMAGE_DESC_RECORD_TYPE:
 			if (DGifGetImageDesc(gif) == GIF_ERROR) {
-				PrintGifError();
+				eiio_warnings("eiio_read_gif: malformed image\n");
 				eiio_gif_rows_free(&rows);
 				return NULL;
 			}
@@ -168,7 +168,7 @@ eiio_gif_read_rows(GifFileType *gif, int *transparent)
 						j += s_interlaced_jumps[i]) 
 					{
 						if (DGifGetLine(gif, &rows[j][left], width) == GIF_ERROR) {
-							PrintGifError();
+							eiio_warnings("eiio_read_gif: malformed image\n");
 							eiio_gif_rows_free(&rows);
 							return NULL;
 						}
@@ -177,7 +177,7 @@ eiio_gif_read_rows(GifFileType *gif, int *transparent)
 			else {
 				for (i = 0; i < height; i++) {
 					if (DGifGetLine(gif, &rows[top++][left], width) == GIF_ERROR) {
-						PrintGifError();
+						eiio_warnings("eiio_read_gif: malformed image\n");
 						eiio_gif_rows_free(&rows);
 						return NULL;
 					}
@@ -189,7 +189,7 @@ eiio_gif_read_rows(GifFileType *gif, int *transparent)
 			extension = NULL;
 			ext_code = 0;
 			if (DGifGetExtension(gif, &ext_code, &extension) == GIF_ERROR) {
-				PrintGifError();
+				eiio_warnings("eiio_read_gif: malformed image\n");
 				eiio_gif_rows_free(&rows);
 				return NULL;
 			} else if (ext_code == 0xf9 
@@ -201,7 +201,7 @@ eiio_gif_read_rows(GifFileType *gif, int *transparent)
 
 			while (extension != NULL) {
 				if (DGifGetExtensionNext(gif, &extension) == GIF_ERROR) {
-					PrintGifError();
+					eiio_warnings("eiio_read_gif: malformed image\n");
 					eiio_gif_rows_free(&rows);
 					return NULL;
 				}
@@ -222,18 +222,6 @@ eiio_gif_read_rows(GifFileType *gif, int *transparent)
 	return rows;
 }
 
-
-static int 
-simple_read_blob(GifFileType *gif, GifByteType *data, int length) 
-{
-	static int offset = 0;
-	unsigned char*blob = (unsigned char *)gif->UserData;
-	memmove(data, blob + offset, length);
-	offset += length;
-	return length;
-}
-
-
 eiio_image_t *
 eiio_read_gif(const void *blob, size_t blob_size)
 {
@@ -252,7 +240,7 @@ eiio_read_gif(const void *blob, size_t blob_size)
 
 	gif = DGifOpen(&blob_input, read_blob);
 	if (gif == NULL) {
-		PrintGifError();
+		eiio_warnings("eiio_read_gif: initialization failed\n");
 		return NULL;
 	}
 
