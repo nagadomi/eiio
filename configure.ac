@@ -45,7 +45,7 @@ AC_CHECK_HEADERS([stdlib.h string.h])
 AC_CHECK_LIB(ssp, main)
 
 AX_ARG_ENABLE(debug,
-        AC_HELP_STRING([--enable-debug], [enable debug and boundary check. ]), [no],
+        AC_HELP_STRING([--enable-debug], [enable debug symbol and assertion. ]), [no],
 	[eiio_strict=1;CFLAGS="$CFLAGS -g "],
         [eiio_strict=0;CFLAGS="$CFLAGS -DNDEBUG -ffast-math -O3 -funroll-loops "])
 
