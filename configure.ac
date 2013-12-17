@@ -42,17 +42,31 @@ LT_INIT([win32-dll])
 AC_HEADER_STDC
 AC_CHECK_HEADERS([stdlib.h string.h])
 
-AC_CHECK_LIB(ssp, main) # for mingw
+AC_CHECK_LIB(ssp, main)
 
 AX_ARG_ENABLE(debug,
-        AC_HELP_STRING([--enable-debug], [enable assert -g and boundary check. ]), [no],
+        AC_HELP_STRING([--enable-debug], [enable debug symbol and assertion. ]), [no],
 	[eiio_strict=1;CFLAGS="$CFLAGS -g "],
         [eiio_strict=0;CFLAGS="$CFLAGS -DNDEBUG -ffast-math -O3 -funroll-loops "])
 
-AX_ARG_ENABLE(native,
-        AS_HELP_STRING([--disable-native],[disable -march=native]), [yes],
-        [CFLAGS=" $CFLAGS -march=native "],
-        [])
+eiio_arch=native
+AC_ARG_WITH(arch,
+	AS_HELP_STRING([--with-arch],
+	[processor architecture. native/generic. (default is native)]),
+	[eiio_arch=${withval}],
+	[])
+case $eiio_arch in
+  yes|"")
+    eiio_arch=native
+    ;;
+  no)
+    eiio_arch=generic
+    ;;
+esac
+if test "$eiio_arch" != "generic"; then
+   CFLAGS=" $CFLAGS -march=$eiio_arch "
+   AC_MSG_NOTICE(adding -march=$eiio_arch)
+fi
 
 AX_ARG_ENABLE(png,
         AC_HELP_STRING([--disable-png], [ disable libpng support]), [yes],
@@ -132,6 +146,7 @@ esac
 
 CXXFLAGS=$CFLAGS
 
+AC_SUBST(eiio_arch)
 AC_SUBST(eiio_strict)
 AC_SUBST(eiio_jpeg)
 AC_SUBST(eiio_png)
@@ -153,8 +168,7 @@ Makefile
 AC_OUTPUT
 
 echo "libeiio $EIIO_MAJOR.$EIIO_MINOR.$EIIO_REVISION:"
+echo "   Processor Architecture .......... : $eiio_arch"
 echo "   Building with JPEG support....... : $eiio_jpeg"
 echo "   Building with PNG  support....... : $eiio_png"
 echo "   Building with GIF  support....... : $eiio_gif"
-
-
