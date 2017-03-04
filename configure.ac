@@ -2,10 +2,10 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ(2.61)
-AC_INIT(eiio, 0.5.6, nagadomi@nurs.or.jp)
+AC_INIT(eiio, 0.5.7, nagadomi@nurs.or.jp)
 EIIO_MAJOR=0
 EIIO_MINOR=5
-EIIO_REVISION=6
+EIIO_REVISION=7
 AM_INIT_AUTOMAKE([foreign])
 AC_CONFIG_SRCDIR([src])
 AC_CONFIG_HEADER([src/config.h])
