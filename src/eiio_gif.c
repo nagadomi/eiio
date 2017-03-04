@@ -94,7 +94,11 @@ eiio_gif_free(GifFileType **pgif, GifRowType **prows)
 	eiio_gif_rows_free(prows);
 	if (pgif && *pgif) {
 		(*pgif)->SColorMap = NULL;
+#if GIFLIB_MAJOR > 5 || GIFLIB_MAJOR == 5 && GIFLIB_MINOR >= 1
+		DGifCloseFile(*pgif, NULL);
+#else
 		DGifCloseFile(*pgif);
+#endif
 		*pgif = NULL;
 	}
 }
@@ -233,12 +237,15 @@ eiio_read_gif(const void *blob, size_t blob_size)
 	int x, y;
 	eiio_uint8_t bg[3];
 	int transparent = -1;
-	
+
 	blob_input.blob = (unsigned char *)blob;
 	blob_input.blob_size = blob_size;
 	blob_input.offset = 0;
-
+#if GIFLIB_MAJOR > 5 || GIFLIB_MAJOR == 5 && GIFLIB_MINOR >= 1
+	gif = DGifOpen(&blob_input, read_blob, NULL);
+#else
 	gif = DGifOpen(&blob_input, read_blob);
+#endif
 	if (gif == NULL) {
 		eiio_warnings("eiio_read_gif: initialization failed\n");
 		return NULL;
