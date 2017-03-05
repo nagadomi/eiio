@@ -6,6 +6,7 @@ AC_INIT(eiio, 0.5.7, nagadomi@nurs.or.jp)
 EIIO_MAJOR=0
 EIIO_MINOR=5
 EIIO_REVISION=7
+AC_CONFIG_AUX_DIR([.])
 AM_INIT_AUTOMAKE([foreign])
 AC_CONFIG_SRCDIR([src])
 AC_CONFIG_HEADER([src/config.h])
