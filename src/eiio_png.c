@@ -147,12 +147,6 @@ eiio_png_read_rgb(const void *blob, size_t blob_size, int *width, int *height, i
 		png_set_packing(png);
 	}
 
-	if (color_type & PNG_COLOR_MASK_ALPHA) {
-		*channels = 4;
-	} else {
-		*channels = 3;
-	}
-
 	if (color_type & PNG_COLOR_MASK_PALETTE) {
 		png_set_palette_to_rgb(png);
 	}
@@ -163,6 +157,11 @@ eiio_png_read_rgb(const void *blob, size_t blob_size, int *width, int *height, i
 		png_set_gray_to_rgb(png);
 	}
 	png_read_update_info(png, info);
+	if (info->color_type & PNG_COLOR_MASK_ALPHA) {
+		*channels = 4;
+	} else {
+		*channels = 3;
+	}
 
 	rows = (png_bytepp)eiio_malloc(sizeof(png_bytep) * (*height + 1));
 	if (rows == NULL) {
