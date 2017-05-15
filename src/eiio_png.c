@@ -157,7 +157,8 @@ eiio_png_read_rgb(const void *blob, size_t blob_size, int *width, int *height, i
 		png_set_gray_to_rgb(png);
 	}
 	png_read_update_info(png, info);
-	if (info->color_type & PNG_COLOR_MASK_ALPHA) {
+	color_type = png_get_color_type(png, info);
+	if (color_type & PNG_COLOR_MASK_ALPHA) {
 		*channels = 4;
 	} else {
 		*channels = 3;
